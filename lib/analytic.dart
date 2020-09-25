@@ -1,7 +1,5 @@
-import 'package:google_fonts/google_fonts.dart';
-import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
-import 'main.dart';
 import 'package:flutter/material.dart';
+import 'ExpensesAndIncome.dart';
 class AnalyticPage extends StatefulWidget {
   @override
   _AnalyticPageState createState() => _AnalyticPageState();
@@ -9,7 +7,6 @@ class AnalyticPage extends StatefulWidget {
 
 class _AnalyticPageState extends State<AnalyticPage> with SingleTickerProviderStateMixin {
   TabController _tabController;
-
   void initState() {
     _tabController = new TabController(length: 3, vsync: this);
     super.initState();
@@ -42,7 +39,7 @@ class _AnalyticPageState extends State<AnalyticPage> with SingleTickerProviderSt
         ),
         body: TabBarView(
           children: [
-            new Text("This is call Tab View"),
+            new Text("This is New Window"),
             new Text("This is chat Tab View"),
             new Text("This is notification Tab View"),
           ],

@@ -9,7 +9,6 @@ import 'package:koukicons/filmReel.dart';
 import 'package:koukicons/send2.dart';
 import 'EnterPage.dart';
 import 'analytic.dart';
-
 class HomePage extends StatefulWidget {
   @override
   int idx = 0;
@@ -19,7 +18,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   static List<charts.Series<ExpensesData, String>> seriesData;
-
   generateData() {
     var expData = [
       new ExpensesData("Expenses", 30000, Color(0xffc24229)),
@@ -40,13 +38,15 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget build(BuildContext context) {
+    var width=MediaQuery.of(context).size.width;
+    var height=MediaQuery.of(context).size.height;
     List pages = [
       DashBoard(
         seriesData: seriesData,
       ),EnterPage(),
       AnalyticPage(),
     ];
-    List appBarTitle=["Hello Buddy!","Add Value","Analytics"];
+    List appBarTitle=["Hello Buddy!","Add Transaction","Analytics"];
     return SafeArea(
       child: Scaffold(
         appBar: new AppBar(
@@ -58,8 +58,8 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         bottomNavigationBar: CurvedNavigationBar(
-          height: 50,
-          backgroundColor: Colors.white,
+          height: height*0.05,
+          backgroundColor: Color(0xff17395c),
           color: Color(0xff17395c),
           items: <Widget>[
             Icon(Icons.dashboard, size: 20),
@@ -94,6 +94,8 @@ class DashBoard extends StatefulWidget {
 class _DashBoardState extends State<DashBoard> {
   @override
   Widget build(BuildContext context) {
+    var width=MediaQuery.of(context).size.width;
+    var height=MediaQuery.of(context).size.height;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -102,14 +104,14 @@ class _DashBoardState extends State<DashBoard> {
           child: Row(
             children: <Widget>[
               Container(
-                height: 250,
-                width: 250,
+                height: height*0.5,
+                width: width*0.6,
                 child: charts.PieChart(
                   widget.seriesData,
                   animate: true,
                   animationDuration: Duration(seconds: 1),
                   defaultRenderer: new charts.ArcRendererConfig(
-                      arcWidth: 60,
+                      arcWidth:60,
                       startAngle: 1.5 * pi,
                       arcLength: 2 * pi,
                       arcRendererDecorators: [
@@ -124,10 +126,10 @@ class _DashBoardState extends State<DashBoard> {
                 children: <Widget>[
                   Text("Balance",
                       style: GoogleFonts.quicksand(
-                          fontSize: 15, color: Colors.white)),
+                          fontSize: width*0.05, color: Colors.white)),
                   Text(
                     '₹7,500',
-                    style: GoogleFonts.mukta(fontSize: 30, color: Colors.white),
+                    style: GoogleFonts.mukta(fontSize:width*0.07, color: Colors.white),
                   )
                 ],
               )
@@ -155,11 +157,11 @@ class _DashBoardState extends State<DashBoard> {
                     Text(
                       "Income",
                       style: GoogleFonts.quicksand(
-                          fontSize: 15, color: Colors.white),
+                          fontSize: width*0.04, color: Colors.white),
                     ),
                     Text(
                       "₹20,000",
-                      style: TextStyle(color: Colors.white, fontSize: 20),
+                      style: TextStyle(color: Colors.white, fontSize:width*0.06),
                     )
                   ],
                 ),
@@ -176,11 +178,11 @@ class _DashBoardState extends State<DashBoard> {
                     Text(
                       "Expenses",
                       style: GoogleFonts.quicksand(
-                          fontSize: 15, color: Colors.white),
+                          fontSize:width*0.04, color: Colors.white),
                     ),
                     Text(
                       "₹10,000",
-                      style: TextStyle(color: Colors.white, fontSize: 20),
+                      style: TextStyle(color: Colors.white, fontSize: width*0.06),
                     )
                   ],
                 )
@@ -216,7 +218,7 @@ class _DashBoardState extends State<DashBoard> {
                           child: Text(
                             "Recent",
                             style: GoogleFonts.balooTammudu(
-                                fontSize: 20,
+                                fontSize: width*0.07,
                                 color: Colors.black38,
                                 letterSpacing: 1.5),
                           ),
@@ -228,7 +230,7 @@ class _DashBoardState extends State<DashBoard> {
                         ),
                         Container(
                           child: Padding(
-                            padding: EdgeInsets.all(30),
+                            padding: EdgeInsets.all(width*0.05),
                             child: SingleChildScrollView(
                               child: Column(
                                 children: <Widget>[
@@ -266,6 +268,7 @@ class TransactionCard extends StatelessWidget {
   bool isSpent;
 
   Widget build(BuildContext context) {
+    var width=MediaQuery.of(context).size.width;
     return Card(
       elevation: 5,
       child: Column(
@@ -283,14 +286,14 @@ class TransactionCard extends StatelessWidget {
                 ? Text(
                     "₹ -$amount",
                     style: GoogleFonts.mukta(
-                        fontSize: 15,
+                        fontSize: width*0.04,
                         fontWeight: FontWeight.bold,
                         color: Colors.redAccent),
                   )
                 : Text(
                     "₹ $amount",
                     style: GoogleFonts.mukta(
-                        fontSize: 15,
+                        fontSize: width*0.04,
                         fontWeight: FontWeight.bold,
                         color: Colors.green),
                   ),
